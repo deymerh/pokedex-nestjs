@@ -25,7 +25,7 @@ export class PokemonService {
   }
 
   findAll() {
-    return `This action returns all pokemon`;
+    return this.pokemonModel.find({});
   }
 
   async findOne(term: string): Promise<Pokemon> {
@@ -65,7 +65,6 @@ export class PokemonService {
     if (deletedCount === CERO) {
       throw new BadRequestException(`Pokemon with ${id} not found`);
     }
-    return;
   }
 
   private handleExeptions(err: any, action = 'create'): void {
