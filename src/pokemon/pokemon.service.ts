@@ -4,6 +4,7 @@ import { Model, isValidObjectId } from 'mongoose';
 import { Pokemon } from './entities/pokemon.entity';
 import { CreatePokemonDto, UpdatePokemonDto } from './dto';
 import { ERROR_CODES } from './shared/error-codes';
+import { PaginationDto } from '../common/dto/pagination.dto';
 
 const CERO = 0;
 
@@ -16,7 +17,7 @@ export class PokemonService {
 
   async create(createPokemonDto: CreatePokemonDto) {
     try {
-      createPokemonDto.name = createPokemonDto.name.toLowerCase();
+      createPokemonDto.name = createPokemonDto.name.toLocaleLowerCase();
       const pokemon = await this.pokemonModel.create(createPokemonDto);
       return pokemon;
     } catch (error) {
@@ -24,8 +25,14 @@ export class PokemonService {
     }
   }
 
-  findAll() {
-    return this.pokemonModel.find({});
+  findAll(paginationDto: PaginationDto) {
+    const { limit = 10, offset = 0 } = paginationDto;
+
+    return this.pokemonModel.find()
+      .limit(limit)
+      .skip(offset)
+      .sort({ no: 1 })
+      .select('-__v');
   }
 
   async findOne(term: string): Promise<Pokemon> {
