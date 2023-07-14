@@ -16,15 +16,20 @@ yarn install
 npm i -g @nestjs/cli
 ```
 
-4. Levantar la base de datos
+5. Clonar el archivo ```.env.template``` y renombar la copia a ```
+.env```
+
+6. Llenar las variables de entorno definidas en el ```.env```
+
+7. Ejecutar la aplicación en dev:
 ```
-docker-compose up -d
+yarn start:dev
 ```
-5. Reconstruir la base de datos con la semilla
+
+8. Reconstruir la base de datos con la semilla
 ```
 http://localhost:3000/api/v2/seed
 ```
-
 ## Stack usado
 * MongoDB
 * Nest
@@ -54,3 +59,22 @@ Paginación de resultados
 DTOs para Query parameters
 
 Transformaciones de DTOs
+
+Dockerizacion
+
+Mongo Atlas
+
+Env file
+
+joi
+
+Validation Schemas
+
+Configuration Module
+
+Recomendaciones para un Readme útil
+
+Dockerfile
+
+Despliegues
+
